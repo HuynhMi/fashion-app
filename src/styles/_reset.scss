@@ -1,0 +1,34 @@
+:root {
+}
+
+body {
+	padding: 0;
+	margin: 0;
+}
+
+html {
+	font-family: 'Montserrat', sans-serif;
+	font-size: 100%;
+	line-height: 1;
+	box-sizing: border-box;
+}
+
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: inherit;
+}
+
+ul {
+	list-style: none;
+}
+
+button {
+	border: 1px solid transparent;
+	background-color: transparent;
+	outline: 1px solid transparent;
+}
+
+a {
+	text-decoration: none;
+}

@@ -1,0 +1,65 @@
+@import '/src/styles/colors';
+@import '/src/styles/variant';
+
+.form-group {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+
+	& label {
+		font-size: 15px;
+		color: #333;
+		font-weight: 500;
+		text-transform: capitalize;
+	}
+
+	&-input {
+		height: 40px;
+		padding: 0px 15px;
+
+		border: 1px solid #ccc;
+		border-radius: $rounded-md;
+
+		display: flex;
+		align-items: center;
+		overflow: hidden;
+
+		background-color: $white;
+
+		&.has-error {
+			border-color: red;
+		}
+
+		&:focus-within {
+			border-color: $primary-color;
+			box-shadow: 0px 0px 5px 2px rgba($primary-color, 0.4);
+		}
+
+		& input {
+			font-size: 14px;
+			flex: 1;
+			border: unset;
+			height: 100%;
+			outline: unset;
+		}
+
+		& .btn-toggle-password {
+			font-size: 20px;
+			cursor: pointer;
+			display: flex;
+			align-items: center;
+		}
+	}
+
+	&-checkbox {
+		& label {
+			margin-left: 5px;
+		}
+	}
+
+	.error-message {
+		font-size: 14px;
+		color: red;
+		max-width: 450px;
+	}
+}
