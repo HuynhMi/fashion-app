@@ -10,4 +10,4 @@ export interface IFormValues {
 
 export type IFormKeys = keyof IFormValues
 
-export type AxiosRegisterResponse = { "email": string, "password": string, "returnSecureToken": boolean }
+export type AxiosRegisterResponse = { "email": string, "returnSecureToken": boolean }

@@ -1,14 +1,18 @@
 import { useForm } from 'react-hook-form';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import Button from '../components/commons/Button';
 import SingleCheckBoxField from '../components/forms/SingleCheckBoxField';
 import TextField from '../components/forms/TextField';
 import { IFormValues } from '../interfaces';
+import { setUserInfo } from '../redux/auth/authSlice';
+import { useAppDispatch } from '../redux/hooks';
 import authService from '../services/auth.service';
 import { ROUTES } from '../utils/routes';
 import { loginSchema } from '../utils/validations';
 
 const LoginForm = () => {
+	const dispatch = useAppDispatch();
+	const navigate = useNavigate();
 	const {
 		register,
 		handleSubmit,
@@ -21,8 +25,9 @@ const LoginForm = () => {
 	});
 
 	const onSubmit = async (val: IFormValues) => {
-		const res = await authService.login(val);
-		console.log(res);
+		const { data } = await authService.login(val);
+		dispatch(setUserInfo({ ...data }));
+		navigate(ROUTES.home);
 	};
 
 	return (

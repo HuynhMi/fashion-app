@@ -2,7 +2,7 @@
 	&-title {
 		text-align: center;
 		margin-bottom: 30px;
-		color: #00297A;
+		color: #00297a;
 	}
 
 	&-container {
@@ -74,4 +74,29 @@
 		outline-width: 2px;
 		outline-color: $primary-dark-color;
 	}
+}
+
+// Profile
+.profile {
+	&-txt {
+		margin-top: 20px;
+	}
+}
+
+// global classes
+.flex {
+	display: flex;
+	&--center {
+		align-items: center;
+		justify-content: center;
+	}
+}
+
+.h-100 {
+	min-height: 100vh;
+}
+
+
+.mt-20 {
+	margin-top: 20px;
 }

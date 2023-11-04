@@ -1,5 +1,8 @@
 import React from 'react';
-import { Outlet } from 'react-router-dom';
+import { Navigate, Outlet } from 'react-router-dom';
+import { selectUserInfoState } from '../redux/auth/selectors';
+import { useAppSelector } from '../redux/hooks';
+import { ROUTES } from '../utils/routes';
 import './styles.scss';
 
 interface AuthLayoutProps {
@@ -7,11 +10,17 @@ interface AuthLayoutProps {
 }
 
 const AuthLayout: React.FC<AuthLayoutProps> = () => {
-	return (
+	const user = useAppSelector(selectUserInfoState);
+	return user?.displayName ? (
+		<Navigate
+			to={ROUTES.home}
+			replace
+		/>
+	) : (
 		<div className="auth-layout">
-			<div className='auth-container'>
+			<div className="auth-container">
 				<Outlet />
-			</div>
+			</div> 
 		</div>
 	);
 };
