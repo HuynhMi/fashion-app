@@ -1,8 +1,8 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 // Define a type for the slice state
 interface UserInfoProp {
-    email?: string;
-    displayName?: string
+    email?: string | null;
+    displayName?: string | null;
 }
 
 interface AuthState {

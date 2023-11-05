@@ -6,6 +6,7 @@ import { IFormValues } from '../interfaces';
 import { setUserInfo } from '../redux/auth/authSlice';
 import { useAppDispatch } from '../redux/hooks';
 import authService from '../services/auth.service';
+import { notify } from '../utils/helper';
 import { ROUTES } from '../utils/routes';
 import { registerSchema } from '../utils/validations';
 
@@ -26,10 +27,22 @@ const RegisterForm = () => {
 		},
 	});
 
-	const onSubmit = async (val: IFormValues) => {
-		const { data } = await authService.register(val);
-		dispatch(setUserInfo({ email: data.email }));
-		navigate(ROUTES.home);
+	const onSubmit = async ({ email, password }: IFormValues) => {
+		try {
+			const { user } = await authService.register(email, password);
+			dispatch(
+				setUserInfo({
+					email: user.email,
+					displayName: user.displayName,
+				}),
+			);
+			notify('Register successful!', 'success');
+			navigate(ROUTES.home);
+		} catch (error) {
+			notify('Register failed', 'error');
+			// const errorCode = error.code;
+			// const errorMessage = error.message;
+		}
 	};
 
 	return (
@@ -91,6 +104,7 @@ const RegisterForm = () => {
 				<Button
 					type="submit"
 					title="Create Account"
+					color="info"
 				/>
 			</div>
 

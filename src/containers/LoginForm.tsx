@@ -7,6 +7,7 @@ import { IFormValues } from '../interfaces';
 import { setUserInfo } from '../redux/auth/authSlice';
 import { useAppDispatch } from '../redux/hooks';
 import authService from '../services/auth.service';
+import { notify } from '../utils/helper';
 import { ROUTES } from '../utils/routes';
 import { loginSchema } from '../utils/validations';
 
@@ -21,13 +22,27 @@ const LoginForm = () => {
 		defaultValues: {
 			email: '',
 			password: '',
+			rememberMe: false,
 		},
 	});
 
-	const onSubmit = async (val: IFormValues) => {
-		const { data } = await authService.login(val);
-		dispatch(setUserInfo({ ...data }));
-		navigate(ROUTES.home);
+	const onSubmit = async ({ email, password, rememberMe }: IFormValues) => {
+		try {
+			if (!rememberMe) {
+				await authService.setPersistence();
+			}
+			const { user } = await authService.login(email, password);
+			dispatch(
+				setUserInfo({
+					email: user.email,
+					displayName: user.displayName,
+				}),
+			);
+			notify('Login successful', 'success');
+			navigate(ROUTES.home);
+		} catch (error) {
+			notify('Login failed', 'error');
+		}
 	};
 
 	return (
@@ -79,6 +94,7 @@ const LoginForm = () => {
 				<Button
 					type="submit"
 					title="Login"
+					color="info"
 				/>
 			</div>
 			<div className="form-switch">

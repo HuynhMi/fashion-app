@@ -1,31 +1,31 @@
-import React from 'react';
+import { onAuthStateChanged } from 'firebase/auth';
+import React, { useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
+import { auth } from '../config/firebase';
+import { setUserInfo } from '../redux/auth/authSlice';
+import { useAppDispatch } from '../redux/hooks';
 
 interface MainLayoutProps {
 	children?: React.ReactNode;
 }
 
 const MainLayout: React.FC<MainLayoutProps> = () => {
+	const dispatch = useAppDispatch();
 	
-	// const renderNav = () =>
-	// 	Object.keys(ROUTES).map((key) => (
-	// 		<NavLink
-	// 			key={key}
-	// 			to={ROUTES[key]}
-	// 			className={({ isActive, isPending }) =>
-	// 				isPending ? 'pending' : isActive ? 'active' : ''
-	// 			}
-	// 		>
-	// 			{key}
-	// 		</NavLink>
-	// 	));
+	useEffect(() => {
+		onAuthStateChanged(auth, (user) => {
+			if (user) {
+				dispatch(
+					setUserInfo({
+						email: user.email,
+						displayName: user.displayName,
+					}),
+				);
+			}
+		});
+	}, [dispatch]);
 
-	return (
-		<div>
-			{/* {renderNav()} */}
-			<Outlet />
-		</div>
-	);
+	return <Outlet />;
 };
 
 export default MainLayout;

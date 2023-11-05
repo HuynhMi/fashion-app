@@ -1,14 +1,14 @@
-import { AxiosRegisterResponse, IFormValues } from "../interfaces";
-import request from "../utils/request";
+import { User, browserSessionPersistence, createUserWithEmailAndPassword, setPersistence, signInWithEmailAndPassword, signOut, updateProfile } from "firebase/auth";
+import { auth } from "../config/firebase";
 
 const authService = {
-    register: (data: IFormValues) =>
-        request.post<AxiosRegisterResponse>(`/accounts:signUp?key=${import.meta.env.VITE_API_KEY}`, data),
-    login: (data: IFormValues) =>
-        request.post<AxiosRegisterResponse>(`/accounts:signInWithPassword?key=${import.meta.env.VITE_API_KEY}`, data),
-    saveUserToDB: () => { },
-    getUser: () => { },
-    getUserFromDB: () => { }
+    register: (email: string, password: string) =>
+        createUserWithEmailAndPassword(auth, email, password),
+    login: (email: string, password: string) =>
+        signInWithEmailAndPassword(auth, email, password),
+    logout: () => signOut(auth),
+    setPersistence: () => setPersistence(auth, browserSessionPersistence),
+    updateProfile: (displayName: string, photoURL: string) => updateProfile(auth.currentUser as User, { displayName, photoURL })
 }
 
 export default authService

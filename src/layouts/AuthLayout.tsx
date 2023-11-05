@@ -10,8 +10,10 @@ interface AuthLayoutProps {
 }
 
 const AuthLayout: React.FC<AuthLayoutProps> = () => {
+	
 	const user = useAppSelector(selectUserInfoState);
-	return user?.displayName ? (
+
+	return user?.email ? (
 		<Navigate
 			to={ROUTES.home}
 			replace

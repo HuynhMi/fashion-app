@@ -11,7 +11,7 @@ interface PrivateLayoutProps {
 const PrivateLayout: React.FC<PrivateLayoutProps> = ({ children }) => {
 	const userProfile = useAppSelector(selectUserInfoState);
 
-	return userProfile?.displayName ? (
+	return userProfile?.email ? (
 		children
 	) : (
 		<Navigate

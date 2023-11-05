@@ -6,4 +6,5 @@ export const ROUTES: Props = {
     login: '/login',
     register: '/register',
     forgot: '/forgotpassword',
+    updateProfile: '/updateProfile'
 }

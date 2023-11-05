@@ -5,9 +5,15 @@ export interface IFormValues {
 	email: string;
 	confirmPassword: string;
 	firstName: string;
-	lastName: string
+	lastName: string;
+	displayName: string
+
 }
 
 export type IFormKeys = keyof IFormValues
 
 export type AxiosRegisterResponse = { "email": string, "returnSecureToken": boolean }
+
+export interface RequestByTokenProp {
+	idToken: string
+}

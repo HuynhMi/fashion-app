@@ -53,6 +53,10 @@
 			}
 		}
 	}
+
+	&.update-form {
+		width: 300px;
+	}
 }
 
 .button {
@@ -64,7 +68,7 @@
 	border-radius: $rounded-md;
 	cursor: pointer;
 
-	background-color: $primary-color;
+	background-color: transparent;
 	transition: all linear 0.2s;
 
 	&:hover {
@@ -73,6 +77,14 @@
 	&:focus-visible {
 		outline-width: 2px;
 		outline-color: $primary-dark-color;
+	}
+
+	&.info {
+		background-color: $primary-color;
+	}
+
+	&.error {
+		background-color: $red-color;
 	}
 }
 
@@ -96,7 +108,10 @@
 	min-height: 100vh;
 }
 
-
 .mt-20 {
 	margin-top: 20px;
+}
+
+.ml-5 {
+	margin-left: 5px;
 }

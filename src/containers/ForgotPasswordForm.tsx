@@ -42,6 +42,7 @@ const ForgotPasswordForm = () => {
 				<Button
 					type="submit"
 					title="Send"
+					color="info"
 				/>
 			</div>
 			<div className="form-switch center">
